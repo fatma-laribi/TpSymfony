@@ -1,32 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/pulse/bootstrap.min.css" integrity="sha384-L7+YG8QLqGvxQGffJ6utDKFwmGwtLcCjtwvonVZR/Ba2VzhpMwBz51GaXnUsuYbj" crossorigin="anonymous">
-    <title>To Do</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/darkly/bootstrap.min.css">
+    <title>Document</title>
 </head>
 <body>
-{%  for cle,valeur in app.session.flashBag.get('message') %}
-<div class="alert alert-dismissible alert-info">{{ valeur }}</div>
-{% endfor %}
-{%  for cle,valeur in app.session.flashBag.get('success') %}
-    <div class="alert alert-dismissible alert-success">{{ valeur }}</div>
-{% endfor %}
-{%  for cle,valeur in app.session.flashBag.get('error') %}
-    <div class="alert alert-dismissible alert-danger">{{ valeur }}</div>
-{% endfor %}
-<h1>TODO LIST</h1>
-<ol>
-    {%  for cle,valeur in app.session.get('ToDo') %}
-    <li>
-        <h3>{{ cle }}</h3>
-        <div>{{  valeur }}</div>
-    </li>
+<div class="container">
+    {% for message in app.session.flashBag.get('info') %}
+        <div class="alert alert-info">
+            {{ message }}
+        </div>
     {% endfor %}
 
-</ol>
+    {% for message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h1>ListeToDos</h1>
+
+    <ol class="list-group">
+        {% for name,description in app.session.get('todos') %}
+            <li class="list-group-item">
+                {{name}} : {{ description }}
+            </li>
+        {% endfor %}
+    </ol>
+</div>
+
 </body>
 </html>
